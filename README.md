@@ -3,6 +3,9 @@
 
 This repository  contains the scripts and slides for the lecture on the 5th of Jan 2020.
 
+[Link to the slides](/slides_lecture.html)
+
+
 ## Topic
 
 The Lecture is scheduled for two hours and aims to explain the basics of markdown and ggplot2. Consequently introducing to {flexdashboard} so that the learners can create dashboards.
