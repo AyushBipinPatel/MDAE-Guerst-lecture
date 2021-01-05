@@ -1,0 +1,83 @@
+---
+title: "Demo_py"
+author: "Ayush Patel"
+date: "05/01/2021"
+output: html_document
+---
+
+## Necessary R Libarries
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse) 
+library(reticulate) # The interface to Python within R
+library(palmerpenguins)
+```
+
+## Demonstrate Python REPL
+
+```{r}
+repl_python()
+```
+
+## Importing Python Modules
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+```
+
+## Read a file on disk into python
+
+```{python}
+gap_dat = pd.read_csv("gapminder_data.csv")
+
+### Show the gapminder data
+
+print(gap_dat.head())
+```
+
+
+## Example of Basic Manipulation in Python
+
+```{python}
+## Filter countries from Europe
+
+gap_dat[gap_dat['continent'] == "Europe"]
+
+```
+
+
+## Using R objects in Python
+
+```{python}
+r.penguins[r.penguins['species'] == "Gentoo"]
+```
+
+## Using Python Objects in R
+
+```{r}
+## We will animate the gapminder data as a visualization using the 
+## gganimate library (this is the demo code from gganimate)
+
+library(gganimate)
+library(gapminder)
+
+ggplot(py$gap_dat, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
+  geom_point(alpha = 0.7, show.legend = FALSE) +
+  scale_colour_manual(values = country_colors) +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  facet_wrap(~continent) +
+  labs(title = 'Year: {frame_time}', x = 'GDP per capita', y = 'life expectancy') +
+  transition_time(as.integer(year)) +
+  ease_aes('linear')
+
+```
+
+
+
+
+
+
+
